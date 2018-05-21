@@ -30,8 +30,8 @@ $(document).ready(function() {
     if (authorId) {
       authorId = "/?author_id=" + authorId;
     }
-    $.get("/api/posts" + authorId, function(data) {
-      console.log("Posts", data);
+    $.get("/api/burgers" + authorId, function(data) {
+      console.log("Burgers", data);
       posts = data;
       if (!posts || !posts.length) {
         displayEmpty(author);
@@ -46,7 +46,7 @@ $(document).ready(function() {
   function deletePost(id) {
     $.ajax({
       method: "DELETE",
-      url: "/api/posts/" + id
+      url: "/api/burgers/" + id
     })
       .then(function() {
         getPosts(postCategorySelect.val());

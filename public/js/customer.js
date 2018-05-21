@@ -28,7 +28,7 @@ $(document).ready(function() {
 
   // A function for creating an author. Calls getAuthors upon completion
   function upsertAuthor(authorData) {
-    $.post("/api/authors", authorData)
+    $.post("/api/customers", authorData)
       .then(getAuthors);
   }
 
@@ -46,7 +46,7 @@ $(document).ready(function() {
 
   // Function for retrieving authors and getting them ready to be rendered to the page
   function getAuthors() {
-    $.get("/api/authors", function(data) {
+    $.get("/api/customers", function(data) {
       var rowsToAdd = [];
       for (var i = 0; i < data.length; i++) {
         rowsToAdd.push(createAuthorRow(data[i]));
@@ -83,7 +83,7 @@ $(document).ready(function() {
     var id = listItemData.id;
     $.ajax({
       method: "DELETE",
-      url: "/api/authors/" + id
+      url: "/api/customers/" + id
     })
       .then(getAuthors);
   }

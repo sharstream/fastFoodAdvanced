@@ -3,10 +3,8 @@ var db = require("../models");
 module.exports = function(app) {
   app.get("/api/customers", function (req, res) {
     // 1. Add a join to include all of each Customer's Burgers
-    db.Author.findAll({
-      includes: [{
-        model: db.Burger
-      }]
+    db.Customer.findAll({
+      includes: [db.Burger]
     }).then(function(dbCustomer) {
       res.json(dbCustomer);
     });
@@ -18,9 +16,7 @@ module.exports = function(app) {
       where: {
         id: req.params.id
       },
-      includes: [{
-        model: db.Burger
-      }]
+      includes: [db.Burger]
     }).then(function (dbCustomer) {
       res.json(dbCustomer);
     });
@@ -33,7 +29,7 @@ module.exports = function(app) {
   });
 
   app.delete("/api/customers/:id", function (req, res) {
-    db.Author.destroy({
+    db.Customer.destroy({
       where: {
         id: req.params.id
       }

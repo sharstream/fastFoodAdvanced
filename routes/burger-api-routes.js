@@ -21,9 +21,7 @@ module.exports = function(app) {
     // 1. Add a join here to include all of the Customers to these Burgers
     db.Burger.findAll({
       where: query,
-      include: [{
-        model: db.Customer
-      }]
+      include: [db.Customer]
     }).then(function(dbBurger) {
       res.json(dbBurger);
     });
@@ -36,12 +34,7 @@ module.exports = function(app) {
       where: {
         id: req.params.id
       },
-      include: [{
-        model: db.Customer,
-        where: {
-          name: req.body.name
-        }
-      }]
+      include: [db.Customer]
     }).then(function (dbBurger) {
       console.log(dbBurger);
       res.json(dbBurger);
@@ -50,14 +43,14 @@ module.exports = function(app) {
 
   // POST route for saving a new Burger
   app.post("/api/burgers", function(req, res) {
-    db.Post.create(req.body).then(function (dbBurger) {
+    db.Burger.create(req.body).then(function (dbBurger) {
       res.json(dbBurger);
     });
   });
 
   // DELETE route for deleting Burgers
   app.delete("/api/burgers/:id", function(req, res) {
-    db.Post.destroy({
+    db.Burger.destroy({
       where: {
         id: req.params.id
       }
@@ -68,7 +61,7 @@ module.exports = function(app) {
 
   // PUT route for updating Burgers
   app.put("/api/burgers", function(req, res) {
-    db.Post.update(
+    db.Burger.update(
       req.body,
       {
         where: {

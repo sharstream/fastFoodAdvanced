@@ -58,8 +58,8 @@ $(document).ready(function() {
 
   // Submits a new post and brings user to blog page upon completion
   function submitPost(post) {
-    $.post("/api/posts", post, function() {
-      window.location.href = "/blog";
+    $.post("/api/burgers", post, function() {
+      window.location.href = "/burgers";
     });
   }
 
@@ -68,10 +68,10 @@ $(document).ready(function() {
     var queryUrl;
     switch (type) {
     case "post":
-      queryUrl = "/api/posts/" + id;
+      queryUrl = "/api/burgers/" + id;
       break;
     case "author":
-      queryUrl = "/api/authors/" + id;
+      queryUrl = "/api/customers/" + id;
       break;
     default:
       return;
@@ -92,13 +92,13 @@ $(document).ready(function() {
 
   // A function to get Authors and then render our list of Authors
   function getAuthors() {
-    $.get("/api/authors", renderAuthorList);
+    $.get("/api/customers", renderAuthorList);
   }
   // Function to either render a list of authors, or if there are none, direct the user to the page
   // to create an author first
   function renderAuthorList(data) {
     if (!data.length) {
-      window.location.href = "/authors";
+      window.location.href = "/cms";
     }
     $(".hidden").removeClass("hidden");
     var rowsToAdd = [];
@@ -124,11 +124,11 @@ $(document).ready(function() {
   function updatePost(post) {
     $.ajax({
       method: "PUT",
-      url: "/api/posts",
+      url: "/api/burgers",
       data: post
     })
       .then(function() {
-        window.location.href = "/blog";
+        window.location.href = "/burgers";
       });
   }
 });
